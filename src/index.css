@@ -81,6 +81,10 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.148);
 }
 
+.imp-bg {
+  background: rgba(84, 84, 84, 0.441) !important;
+}
+
 
 
 /* @theme inline {

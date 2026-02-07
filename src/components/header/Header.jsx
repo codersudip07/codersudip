@@ -7,7 +7,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 w-full h-20 content-center bg-transparent md:pointer-events-none z-50">
+      <header className="fixed inset-x-0 top-0 w-full h-20 content-center bg-transparent md:pointer-events-none z-90">
         {/* NAVBAR */}
         <nav className="glass container mx-auto h-10 w-fit content-center px-8 rounded-sm md:pointer-events-auto">
           <ul className="uppercase text-(--primary) h-full hidden md:flex items-center gap-6 py-2 font-medium text-sm">
@@ -39,7 +39,7 @@ const Header = () => {
 
         {/* MOBILE ASIDE MENU */}
         <aside
-          className={`glass fixed md:hidden w-screen h-screen inset-0
+          className={`glass imp fixed md:hidden w-screen h-screen inset-0
           flex items-center justify-center
           transition-all duration-300 -z-20
           ${menuOpen ? "translate-y-0" : "translate-y-full"}`}
@@ -50,7 +50,7 @@ const Header = () => {
                 <a
                   href={`#${item}`}
                   onClick={() => setMenuOpen(false)}
-                  className="text-3xl hover:scale-95 duration-100"
+                  className="text-3xl font-bold hover:scale-95 duration-100"
                 >
                   {item}
                 </a>
