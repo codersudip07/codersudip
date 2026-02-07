@@ -1,15 +1,82 @@
 // import TextPressure from "./TextPressure";
-
+import { useRef, useState } from "react";
 import Button from "../Button";
 import Title from "../Title";
 
 const About = () => {
+    const boxRef = useRef(null);
+    const [pos, setPos] = useState({ x: 0, y: 0 });
+    const [show, setShow] = useState(false);
+
+    const handleMove = (e) => {
+      const rect = boxRef.current.getBoundingClientRect();
+      setPos({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+    };
   return (
     <>
       <section id="about" className="w-full pb-5 px-2 md:px-[5%]">
         <figure className="container mx-auto">
           <div className="w-full">
-            <h2 className="text-[18vw] leading-none text-center">Developer</h2>
+            <h2 className="md:hidden text-[18vw] leading-none text-center">Developer</h2>
+            <div
+              ref={boxRef}
+              onMouseEnter={() => setShow(true)}
+              onMouseMove={handleMove}
+              onMouseLeave={() => setShow(false)}
+              className="relative w-full hidden md:block"
+            >
+              <h2 className="text-[18vw] text-stroke leading-none text-center relative z-10 pointer-events-none">
+                Developer
+              </h2>
+
+              {show && (
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    WebkitMaskImage: `text`,
+                    maskImage: `text`,
+                  }}
+                >
+                  <div
+                    className="absolute w-40 h-40 bg-(--sec)  blur-3xl rounded-full"
+                    style={{
+                      left: pos.x,
+                      top: pos.y,
+                      transform: "translate(-50%, -50%)",
+                    }}
+                  />
+                </div>
+              )}
+
+              <svg className="absolute inset-0 w-full h-full">
+                <defs>
+                  <mask id="text-mask">
+                    <rect width="100%" height="100%" fill="black" />
+                    <text
+                      x="50%"
+                      y="75%"
+                      textAnchor="middle"
+                      fontSize="18vw"
+                      fill="white"
+                      fontFamily="inherit"
+                    >
+                      Developer
+                    </text>
+                  </mask>
+                </defs>
+
+                <rect
+                  width="100%"
+                  height="100%"
+                  fill="transparent"
+                  mask="url(#text-mask)"
+                />
+              </svg>
+            </div>
+
             <div className="flex items-center mt-5 md:mt-0">
               <Title title="About me" />
               <div className="hidden md:block w-40 h-40 rounded-full bg-(--sec) translate-x-[70vw]"></div>

@@ -59,7 +59,7 @@ const Header = () => {
 
             <li>
               <Button
-                onClick={() => {
+                onclick={() => {
                   setMenuOpen(false);
                   window.location.href = "tel:+917001894943";
                 }}
